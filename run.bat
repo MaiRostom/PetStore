@@ -1,0 +1,1 @@
+newman run "PetStore-Collection.postman_collection.json" -e "Testing enviroment.postman_environment.json" --reporters=cli,htmlextra

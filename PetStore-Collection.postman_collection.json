@@ -1,0 +1,2327 @@
+{
+	"info": {
+		"_postman_id": "11395b9a-cb8b-4843-a507-77eef4c20eab",
+		"name": "PetStore-Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "525259",
+		"_collection_link": "https://www.postman.com/restless-resonance-922790/workspace/pet-store/collection/525259-11395b9a-cb8b-4843-a507-77eef4c20eab?action=share&source=collection_link&creator=525259"
+	},
+	"item": [
+		{
+			"name": "1. Pet",
+			"item": [
+				{
+					"name": "1.1 Upload Pet Image",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							},
+							{
+								"key": "accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "additionalMetadata\n",
+									"value": "tyy",
+									"description": "hello",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"contentType": "image/jpeg",
+									"type": "file",
+									"src": "/C:/Users/EGYPT SRORE/Desktop/WhatsApp Image 2023-12-01 at 18.49.17.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/pet/{{petID}}/uploadImage",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"{{petID}}",
+								"uploadImage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.2 Create New Pet",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Generate a random integer between 100 and 1000\r",
+									"const randomId = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;\r",
+									"\r",
+									"// Set the 'id' variable in the collection\r",
+									"pm.collectionVariables.set('petID', randomId);\r",
+									"\r",
+									"// Get the value of the 'id' variable from the collection\r",
+									"const petID = pm.collectionVariables.get('petID');\r",
+									"\r",
+									"// Log the generated id (optional)\r",
+									"console.log('Generated petID:', petID);\r",
+									"\r",
+									"\r",
+									"///////////cat ID/////////////\r",
+									"const catId = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;\r",
+									"pm.collectionVariables.set('catId', catId);\r",
+									"console.log('Generated catId:', catId);\r",
+									"\r",
+									"////////////////Tag ID//////////\r",
+									"const tagID = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;\r",
+									"pm.collectionVariables.set('tagID', tagID);\r",
+									"\r",
+									"\r",
+									"\r",
+									"// Now you can use the 'id' variable in your request as needed\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"// Function to generate a random string of letters with a given length\r",
+									"function generateRandomLetters(length) {\r",
+									"    const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';\r",
+									"    let result = '';\r",
+									"    for (let i = 0; i < length; i++) {\r",
+									"        const randomIndex = Math.floor(Math.random() * letters.length);\r",
+									"        result += letters.charAt(randomIndex);\r",
+									"    }\r",
+									"    return result;\r",
+									"}\r",
+									"\r",
+									"// Generate a random length between 8 and 10\r",
+									"const randomLength = Math.floor(Math.random() * (10 - 8 + 1)) + 8;\r",
+									"\r",
+									"// Generate a random string of letters with the generated length\r",
+									"const randomLetters = generateRandomLetters(randomLength);\r",
+									"\r",
+									"// Set the 'name' variable in the collection\r",
+									"pm.collectionVariables.set('categoryname', randomLetters);\r",
+									"\r",
+									"const petName = generateRandomLetters(randomLength);\r",
+									"pm.collectionVariables.set('petName', petName);\r",
+									"\r",
+									"const tagName = generateRandomLetters(randomLength);\r",
+									"pm.collectionVariables.set('tagName', tagName);\r",
+									"\r",
+									"\r",
+									"// Get the value of the 'name' variable from the collection\r",
+									"const name = pm.collectionVariables.get('name');\r",
+									"\r",
+									"// Log the generated name (optional)\r",
+									"console.log('Generated Name:', name);\r",
+									"\r",
+									"// Now you can use the 'name' variable in your request as needed\r",
+									"\r",
+									"\r",
+									"// Generate a random birth year between 1990 and 1999\r",
+									"const birthYear = Math.floor(Math.random() * (1999 - 1990 + 1)) + 1990;\r",
+									"\r",
+									"// Generate random birth month and day\r",
+									"const birthMonth = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');\r",
+									"const birthDay = String(Math.floor(Math.random() * 28) + 1).padStart(2, '0');\r",
+									"\r",
+									"// Concatenate the components to form the formatted birthdate\r",
+									"const formattedBirthdate = `${birthDay}/${birthMonth}/${birthYear}`;\r",
+									"\r",
+									"// Set the formatted birthdate in the request\r",
+									"pm.environment.set('formattedBirthdate', formattedBirthdate);\r",
+									"console.log('Generated Birthdate :', formattedBirthdate);\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"///////////////Status////////////////\r",
+									"// Generate a random number (0, 1, or 2)\r",
+									"const randomIndex = Math.floor(Math.random() * 3);\r",
+									"\r",
+									"// Set 'statusType' based on the randomIndex\r",
+									"let statusType;\r",
+									"switch (randomIndex) {\r",
+									"  case 0:\r",
+									"    statusType = 'available';\r",
+									"    break;\r",
+									"  case 1:\r",
+									"    statusType = 'pending';\r",
+									"    break;\r",
+									"  case 2:\r",
+									"    statusType = 'sold';\r",
+									"    break;\r",
+									"}\r",
+									"\r",
+									"// Set the 'statusType' variable in the collection\r",
+									"pm.collectionVariables.set('statusType', statusType);\r",
+									"\r",
+									"// Get the value of the 'statusType' variable from the collection\r",
+									"const status = pm.collectionVariables.get('statusType');\r",
+									"\r",
+									"// Set the status in the request body\r",
+									"pm.collectionVariables.set('status', status);\r",
+									"\r",
+									"console.log('Generated status:', status);\r",
+									"\r",
+									"\r",
+									"// Set the status in the request body\r",
+									"pm.collectionVariables.set(\"status\",status);\r",
+									"console.log('Generated status:', status);\r",
+									"///////////random links////////////////\r",
+									"function generateRandomLink() {\r",
+									"  const baseUrl = 'https://example.com';\r",
+									"  const paths = ['/page1', '/page2', '/page3'];\r",
+									"  const queryParams = { param1: 'value1', param2: 'value2', param3: 'value3' };\r",
+									"\r",
+									"  const randomPath = paths[Math.floor(Math.random() * paths.length)];\r",
+									"  const randomQueryParams = Object.entries(queryParams)\r",
+									"    .map(([key, value]) => `${key}=${value}`)\r",
+									"    .join('&');\r",
+									"\r",
+									"  return `${baseUrl}${randomPath}?${randomQueryParams}`;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random link\r",
+									"const randomLink = generateRandomLink();\r",
+									"pm.collectionVariables.set(\"randomLink\",randomLink);\r",
+									"console.log('Random Link:', randomLink);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// save pet ID\r",
+									"pm.collectionVariables.set(\"petID\",JSON.parse(responseBody).id);\r",
+									"// check status code is 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"// check response body contain id\r",
+									"pm.test(\"Check Respnse Schema contain id Property\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"id\")\r",
+									"});\r",
+									"// check id not null\r",
+									"pm.test(\"Check ID Not Null\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody).id).to.not.equal(null)\r",
+									"    pm.expect(JSON.parse(responseBody).id).to.not.equal(undefined)\r",
+									"})\r",
+									"// check id value is intger/number (datatype)\r",
+									"pm.test(\"Check ID is Number \",function(){\r",
+									"    pm.expect(typeof JSON.parse(responseBody).id).to.be.equal('number')\r",
+									"})\r",
+									"// this comment for testing version control\r",
+									"// check id length greater than 13 digit\r",
+									"pm.test(\"Check ID Length Greater Than 13 Digits\",function(){\r",
+									"    console.log(toString(JSON.parse(responseBody).id).length)\r",
+									"    pm.expect(toString(JSON.parse(responseBody).id).length).to.be.greaterThan(13)\r",
+									"})\r",
+									"// test to print ID\r",
+									"pm.test(\"Pet ID is :\"+JSON.parse(responseBody).id,function(){\r",
+									"     pm.expect(JSON.parse(responseBody).id).to.not.equal(null)\r",
+									"})\r",
+									"\r",
+									"\r",
+									"//check Birthdate \r",
+									"\r",
+									"// check value as expected"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{petID}},\r\n  \"category\": {\r\n    \"id\": {{catId}},\r\n    \"name\": \"{{categoryname}}\"\r\n  },\r\n  \"name\": \"{{petName}}\",\r\n  \"photoUrls\": [\r\n    \"{{randomLink}}\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": {{tagID}},\r\n      \"name\": \"{{tagName}}\"\r\n    }\r\n  ],\r\n  \"status\": \"{{status}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/pet",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.3 Update Exisiting Pet",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Generate a random integer between 100 and 1000\r",
+									"const randomId = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;\r",
+									"\r",
+									"// Set the 'id' variable in the collection\r",
+									"pm.collectionVariables.set('updatedPetID', randomId);\r",
+									"\r",
+									"// Get the value of the 'id' variable from the collection\r",
+									"const petID = pm.collectionVariables.get('updatedPetID');\r",
+									"\r",
+									"// Log the generated id (optional)\r",
+									"console.log('Generated petID:', petID);\r",
+									"\r",
+									"\r",
+									"///////////cat ID/////////////\r",
+									"const catId = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;\r",
+									"pm.collectionVariables.set('updatedCatId', catId);\r",
+									"console.log('Generated updatedCatId:', catId);\r",
+									"\r",
+									"////////////////Tag ID//////////\r",
+									"const tagID = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;\r",
+									"pm.collectionVariables.set('updatedTagID', tagID);\r",
+									"\r",
+									"\r",
+									"\r",
+									"// Now you can use the 'id' variable in your request as needed\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"// Function to generate a random string of letters with a given length\r",
+									"function generateRandomLetters(length) {\r",
+									"    const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';\r",
+									"    let result = '';\r",
+									"    for (let i = 0; i < length; i++) {\r",
+									"        const randomIndex = Math.floor(Math.random() * letters.length);\r",
+									"        result += letters.charAt(randomIndex);\r",
+									"    }\r",
+									"    return result;\r",
+									"}\r",
+									"\r",
+									"// Generate a random length between 8 and 10\r",
+									"const randomLength = Math.floor(Math.random() * (10 - 8 + 1)) + 8;\r",
+									"\r",
+									"// Generate a random string of letters with the generated length\r",
+									"const randomLetters = generateRandomLetters(randomLength);\r",
+									"\r",
+									"// Set the 'name' variable in the collection\r",
+									"pm.collectionVariables.set('updatedCategoryname', randomLetters);\r",
+									"\r",
+									"const petName = generateRandomLetters(randomLength);\r",
+									"pm.collectionVariables.set('updatedPetName', petName);\r",
+									"\r",
+									"const tagName = generateRandomLetters(randomLength);\r",
+									"pm.collectionVariables.set('updatedTagName', tagName);\r",
+									"\r",
+									"\r",
+									"// Get the value of the 'name' variable from the collection\r",
+									"const name = pm.collectionVariables.get('updatedname');\r",
+									"\r",
+									"// Log the generated name (optional)\r",
+									"console.log('Generated updated Name:', name);\r",
+									"\r",
+									"// Now you can use the 'name' variable in your request as needed\r",
+									"\r",
+									"\r",
+									"// Generate a random birth year between 1990 and 1999\r",
+									"const birthYear = Math.floor(Math.random() * (1999 - 1990 + 1)) + 1990;\r",
+									"\r",
+									"// Generate random birth month and day\r",
+									"const birthMonth = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');\r",
+									"const birthDay = String(Math.floor(Math.random() * 28) + 1).padStart(2, '0');\r",
+									"\r",
+									"// Concatenate the components to form the formatted birthdate\r",
+									"const formattedBirthdate = `${birthDay}/${birthMonth}/${birthYear}`;\r",
+									"\r",
+									"// Set the formatted birthdate in the request\r",
+									"pm.environment.set('updatedFormattedBirthdate', formattedBirthdate);\r",
+									"console.log('Generated updated Birthdate :', formattedBirthdate);\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"///////////////Status////////////////\r",
+									"// Generate a random number (0, 1, or 2)\r",
+									"const randomIndex = Math.floor(Math.random() * 3);\r",
+									"\r",
+									"// Set 'statusType' based on the randomIndex\r",
+									"let updatedStatusType;\r",
+									"switch (randomIndex) {\r",
+									"  case 0:\r",
+									"    updatedStatusType = 'available';\r",
+									"    break;\r",
+									"  case 1:\r",
+									"    updatedStatusType = 'pending';\r",
+									"    break;\r",
+									"  case 2:\r",
+									"    updatedStatusType = 'sold';\r",
+									"    break;\r",
+									"}\r",
+									"\r",
+									"// Set the 'statusType' variable in the collection\r",
+									"pm.collectionVariables.set('updatedStatusType', updatedStatusType);\r",
+									"\r",
+									"// Get the value of the 'statusType' variable from the collection\r",
+									"const status = pm.collectionVariables.get('updatedStatusType');\r",
+									"\r",
+									"// Set the status in the request body\r",
+									"pm.collectionVariables.set('updatedStatusType', status);\r",
+									"\r",
+									"console.log('Generated updated status:', status);\r",
+									"\r",
+									"\r",
+									"// Set the status in the request body\r",
+									"pm.collectionVariables.set(\"updatedStatus\",status);\r",
+									"console.log('Generated status:', status);\r",
+									"///////////random links////////////////\r",
+									"function generateRandomLink() {\r",
+									"  const baseUrl = 'https://example.com';\r",
+									"  const paths = ['/page1', '/page2', '/page3'];\r",
+									"  const queryParams = { param1: 'value1', param2: 'value2', param3: 'value3' };\r",
+									"\r",
+									"  const randomPath = paths[Math.floor(Math.random() * paths.length)];\r",
+									"  const randomQueryParams = Object.entries(queryParams)\r",
+									"    .map(([key, value]) => `${key}=${value}`)\r",
+									"    .join('&');\r",
+									"\r",
+									"  return `${baseUrl}${randomPath}?${randomQueryParams}`;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random link\r",
+									"const randomLink = generateRandomLink();\r",
+									"pm.collectionVariables.set(\"updatedRandomLink\",randomLink);\r",
+									"console.log('Updated Random Link:', randomLink);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{updatedPetID}},\r\n  \"category\": {\r\n    \"id\": {{updatedCatId}},\r\n    \"name\": \"{{updatedCategoryname}}\"\r\n  },\r\n  \"name\": \"{{updatedPetName}}\",\r\n  \"photoUrls\": [\r\n    \"{{updatedRandomLink}}\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": {{updatedTagID}},\r\n      \"name\": \"{{updatedTagName}}\"\r\n    }\r\n  ],\r\n  \"status\": \"{{updatedStatusType}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/pet",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.4 Find Pet By Status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/v2/pet/findByStatus?status={{statusType}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"findByStatus"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "{{statusType}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.5 Find Pet By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/v2/pet/{{petID}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"{{petID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.6 Update pet in store with form data",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Generate a random number (0, 1, or 2)\r",
+									"const randomIndex = Math.floor(Math.random() * 3);\r",
+									"\r",
+									"// Set 'statusType' based on the randomIndex\r",
+									"let statusType;\r",
+									"switch (randomIndex) {\r",
+									"  case 0:\r",
+									"    statusType = 'available';\r",
+									"    break;\r",
+									"  case 1:\r",
+									"    statusType = 'pending';\r",
+									"    break;\r",
+									"  case 2:\r",
+									"    statusType = 'sold';\r",
+									"    break;\r",
+									"}\r",
+									"\r",
+									"// Set the 'statusType' variable in the collection\r",
+									"pm.collectionVariables.set('updatedStatus', statusType);\r",
+									"\r",
+									"// Get the value of the 'statusType' variable from the collection\r",
+									"const status = pm.collectionVariables.get('statusType');\r",
+									"\r",
+									"// Set the status in the request body\r",
+									"pm.collectionVariables.set('updatedStatus', status);\r",
+									"\r",
+									"console.log('Generated updatedStatus:', status);\r",
+									"\r",
+									"\r",
+									"// Set the status in the request body\r",
+									"pm.collectionVariables.set(\"status\",status);\r",
+									"console.log('Generated status:', status);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"[1-Pet].[1.7 Update Pet in store with form Data].[TC-1]-Check if code field is 200\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).code).to.eql(200);\r",
+									"        console.log((JSON.parse(responseBody).code),(200));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[1-Pet].[1.7 Update Pet in store with form Data].[TC-2]-Check if Type field is unkonwn\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).type).to.eql(\"unknown\");\r",
+									"        console.log((JSON.parse(responseBody).type),(\"unknown\"));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[1-Pet].[1.7 Update Pet in store with form Data].[TC-3]-Check if Message field has the same Pet ID to be deleted\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).message).to.eql(String(pm.collectionVariables.get('petID')));\r",
+									"        console.log((JSON.parse(responseBody).message),(pm.collectionVariables.get('petID')));\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "\"{{$randomFirstName}} {{$randomLastName}}\"",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "\"{{updatedStatus}}\"",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/pet/{{petID}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"{{petID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.7 Delete Pet by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"[1-Pet].[1.7 Delete Pet By ID].[TC-1]-Check if code field is 200\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).code).to.eql(200);\r",
+									"        console.log((JSON.parse(responseBody).code),(200));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[1-Pet].[2.3 Delete Order By ID].[TC-2]-Check if Type field is unkonwn\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).type).to.eql(\"unknown\");\r",
+									"        console.log((JSON.parse(responseBody).type),(\"unknown\"));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[1-Pet].[2.3 Delete Order By ID].[TC-3]-Check if Message field has the same Order ID to be deleted\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).message).to.eql(String(pm.collectionVariables.get('petID')));\r",
+									"        console.log((JSON.parse(responseBody).message),(pm.collectionVariables.get('petID')));\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/v2/pet/{{petID}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"{{petID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Store",
+			"item": [
+				{
+					"name": "2.1 Place order for a pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// testcases\r",
+									"// 1- check status code is 200\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].1-Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// 2- check response schema contains id,petID,quanity,shipdate,status,complete\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].2-Check Response include orderID property\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"id\")\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].3-Check Response include petId property\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"petId\")\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].4-Check Response include quantity property\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"quantity\")\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].5-Check Response include shipDate property\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"shipDate\")\r",
+									"});\r",
+									"  pm.test(\"[2-store].[2.1 Place order for a pet].6-Check Response include status property\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"status\")\r",
+									"});\r",
+									" pm.test(\"[2-store].[2.1 Place order for a pet].7-Check Response include complete property\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"complete\")\r",
+									"});\r",
+									"\r",
+									"////////////3-check values are not null or undefined////////////////////////////////////\r",
+									"\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].8-Check ID isnot null: \"+JSON.parse(responseBody).id,function(){\r",
+									"     pm.expect(JSON.parse(responseBody).id).to.not.equal(null);\r",
+									"     pm.expect(JSON.parse(responseBody).id).to.not.equal(undefined);\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].9-Check Pet ID isnot null: \"+JSON.parse(responseBody).petId,function(){\r",
+									"     pm.expect(JSON.parse(responseBody).petId).to.not.equal(null);\r",
+									"     pm.expect(JSON.parse(responseBody).petId).to.not.equal(undefined);\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].10-Check quantity isnot null: \"+JSON.parse(responseBody).quantity,function(){\r",
+									"     pm.expect(JSON.parse(responseBody).quantity).to.not.equal(null);\r",
+									"     pm.expect(JSON.parse(responseBody).quantity).to.not.equal(undefined);\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].11-Check shipDate isnot null: \"+JSON.parse(responseBody).shipDate,function(){\r",
+									"     pm.expect(JSON.parse(responseBody).shipDate).to.not.equal(null);\r",
+									"     pm.expect(JSON.parse(responseBody).shipDate).to.not.equal(undefined);\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].12-Check status isnot null: \"+JSON.parse(responseBody).status,function(){\r",
+									"     pm.expect(JSON.parse(responseBody).status).to.not.equal(null);\r",
+									"     pm.expect(JSON.parse(responseBody).status).to.not.equal(undefined);\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].13-Check complete isnot null: \"+JSON.parse(responseBody).complete,function(){\r",
+									"     pm.expect(JSON.parse(responseBody).complete).to.not.equal(null);\r",
+									"     pm.expect(JSON.parse(responseBody).complete).to.not.equal(undefined);\r",
+									"});\r",
+									"//////////////4-check Data Type Validation//////////////////////////////\r",
+									"// Test for Data Type Validation\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].14-Data Type Validation: orderId should be an integer\", function () {\r",
+									"  pm.expect(typeof JSON.parse(responseBody).id).to.eql(\"number\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].15-Data Type Validation: petId should be a number\", function () {\r",
+									"  pm.expect(typeof JSON.parse(responseBody).petId).to.eql(\"number\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].16-Data Type Validation: quantity should be an integer\", function () {\r",
+									"  pm.expect(typeof JSON.parse(responseBody).quantity).to.eql(\"number\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].[TC17]-Data Type Validation: shipDate should be a valid date\", function () {\r",
+									"  const shipDate = JSON.parse(responseBody).shipDate;\r",
+									"  pm.expect(new Date(shipDate)).to.not.eql(\"Invalid Date\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].18-Data Type Validation: completeStatus should be a boolean\", function () {\r",
+									"  pm.expect(typeof JSON.parse(responseBody).complete).to.eql(\"boolean\");\r",
+									"});\r",
+									"\r",
+									"///////////////////////////5-check Actual with Expected////////////////////////////////////////////////\r",
+									"\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].19-Actual and Expected Results:Check ID value is \"+JSON.parse(request.data).id,function(){\r",
+									"    pm.expect(JSON.parse(request.data).id).to.be.equal(String(JSON.parse(responseBody).id));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].20-Actual and Expected Results:Check Pet ID value is \"+JSON.parse(request.data).petId,function(){\r",
+									"    pm.expect(JSON.parse(request.data).petId).to.be.equal(JSON.parse(responseBody).petId);\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].21-Actual and Expected Results:Check Quantity value is \"+JSON.parse(request.data).quantity,function(){\r",
+									"    pm.expect(JSON.parse(request.data).quantity).to.be.equal(JSON.parse(responseBody).quantity);\r",
+									"});\r",
+									"function formatDateTime(dtStr) {\r",
+									"  const dt = new Date(dtStr);\r",
+									"  return dt.toISOString().substring(0, 10) + 'T00:00:00';\r",
+									"}\r",
+									"\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].22-Actual and Expected Results:Check shipDate value is \"+formatDateTime(JSON.parse(request.data).shipDate),function(){\r",
+									"    pm.expect(formatDateTime(JSON.parse(request.data).shipDate)).to.be.equal(formatDateTime(JSON.parse(responseBody).shipDate));\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].23-Actual and Expected Results:Check status value is \"+JSON.parse(request.data).status,function(){\r",
+									"    pm.expect(JSON.parse(request.data).status).to.be.equal(JSON.parse(responseBody).status);\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.1 Place order for a pet].24-Actual and Expected Results:Check complete value is \"+JSON.parse(request.data).complete,function(){\r",
+									"    pm.expect(JSON.parse(request.data).complete).to.be.equal(JSON.parse(responseBody).complete);\r",
+									"});\r",
+									"////////////////////////////6-check error message for invalid type///////////////////////\r",
+									"// Test to check for Invalid Status Type\r",
+									"// pm.test(\"10000Invalid Status Type\", function () {\r",
+									"//   // Define the expected status code for an invalid status type\r",
+									"//   const expectedErrorCode = 400; // Update with the actual expected error status code\r",
+									"\r",
+									"//   // Check if the response has the expected status code\r",
+									"//   pm.response.to.have.status(expectedErrorCode);\r",
+									"// });\r",
+									"\r",
+									"// pm.test(\"[2-store].[2.1 Place order for a pet].24-check error message for invalid ID type \"+JSON.parse(request.data).id,function(){\r",
+									"//       const expectedErrorMessage = \"Invalid ID type\"; // Update with the actual expected error message or code\r",
+									"//   // Check if the response contains the expected error message or has the expected status code\r",
+									"//   pm.expect(JSON.parse(responseBody).error).to.equal(expectedErrorMessage);\r",
+									"// });\r",
+									"///////////////////////////////////////////"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function generateRandomId(length) {\r",
+									"  const characters = '1234567890';\r",
+									"  let randomId = '';\r",
+									"\r",
+									"  for (let i = 0; i < length; i++) {\r",
+									"    const randomIndex = Math.floor(Math.random() * characters.length);\r",
+									"    randomId += characters.charAt(randomIndex);\r",
+									"  }\r",
+									"\r",
+									"  return randomId;\r",
+									"}\r",
+									"\r",
+									"// Example: Generate a random ID with a length of 8\r",
+									"const orderId = generateRandomId(8);\r",
+									"  pm.collectionVariables.set('orderId', orderId);\r",
+									"console.log(\"Generated orderId:\" , orderId);\r",
+									"\r",
+									"const petId=generateRandomId(8);\r",
+									"  pm.collectionVariables.set('petId', petId);\r",
+									"\r",
+									"console.log(\"Generated petId:\" , petId);\r",
+									"\r",
+									"\r",
+									"function getRandomNumber(min, max) {\r",
+									"  // Use Math.floor to round down to the nearest integer\r",
+									"  return Math.floor(Math.random() * (max - min + 1)) + min;\r",
+									"}\r",
+									"\r",
+									"// Example: Generate a random number between 1 and 100\r",
+									"const quantity = getRandomNumber(1, 100);\r",
+									"  pm.collectionVariables.set('quantity', quantity);\r",
+									"\r",
+									"console.log(\"Generated Quantity:\" , quantity);\r",
+									"\r",
+									"////////////////////////////////date//////////////////////////////////////\r",
+									"function getRandomDate() {\r",
+									"  // Set the date range (adjust as needed)\r",
+									"  const startDate = new Date(2023, 0, 1); // January 1, 2023\r",
+									"  const endDate = new Date(2023, 11, 31); // December 31, 2023\r",
+									"\r",
+									"  // Generate a random timestamp within the date range\r",
+									"  const randomTimestamp = startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime());\r",
+									"\r",
+									"  // Create a new Date object using the random timestamp\r",
+									"  const randomDate = new Date(randomTimestamp);\r",
+									"\r",
+									"  // Format the date as per the specified format\r",
+									"  const formattedDate = randomDate.toISOString().replace(/\\.\\d+/, \"\") + \"+0200\";\r",
+									"\r",
+									"  return formattedDate;\r",
+									"}\r",
+									"\r",
+									"const randomDate = getRandomDate();\r",
+									"pm.collectionVariables.set(\"shipDate\",randomDate)\r",
+									"console.log(\"Generated Ship Date:\",randomDate);\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"///////////////////status/////////////////\r",
+									"function generateRandomStatus() {\r",
+									"  // Generate a random number (0 or 1)\r",
+									"  const randomIndex = Math.floor(Math.random() * 2);\r",
+									"\r",
+									"  // Set 'statusType' to 'available' if randomIndex is 0, otherwise set it to 'unavailable'\r",
+									"  const statusType = (randomIndex === 0) ? 'placed' : 'unPlaced';\r",
+									"\r",
+									"  // Set the 'statusType' variable in the collection\r",
+									"  pm.collectionVariables.set('statusType', statusType);\r",
+									"\r",
+									"  // Get the value of the 'statusType' variable from the collection\r",
+									"  const status = pm.collectionVariables.get('statusType');\r",
+									"\r",
+									"  console.log('Generated status:', status);\r",
+									"}\r",
+									"\r",
+									"// Call the function to generate and set the random status\r",
+									"generateRandomStatus();\r",
+									"/////////////////////////////complete Status///////////////////////////////////\r",
+									"function generateRandomCompleteStatus() {\r",
+									"  // Generate a random number (0 or 1)\r",
+									"  const randomIndex = Math.floor(Math.random() * 2);\r",
+									"\r",
+									"  // Set 'completeStatus' to 'true' if randomIndex is 0, otherwise set it to 'false'\r",
+									"  const completeStatus = (randomIndex === 0) ? 'true' : 'false';\r",
+									"\r",
+									"  // Set the 'completeStatus' variable in the collection\r",
+									"  pm.collectionVariables.set('completeStatus', completeStatus);\r",
+									"\r",
+									"  // Get the value of the 'completeStatus' variable from the collection\r",
+									"  const storedCompleteStatus = pm.collectionVariables.get('completeStatus');\r",
+									"\r",
+									"  // Set the status in the request body\r",
+									"\r",
+									"  console.log('Generated completeStatus:', storedCompleteStatus);\r",
+									"}\r",
+									"\r",
+									"// Call the function to generate and set the random completeStatus\r",
+									"generateRandomCompleteStatus();\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{orderId}}\",\r\n  \"petId\": {{petId}},\r\n  \"quantity\": {{quantity}},\r\n  \"shipDate\": \"{{shippingDate}}\",\r\n  \"status\": \"{{statusType}}\",\r\n  \"complete\":{{completeStatus}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/store/order",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"store",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2.2 Get Order by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"[2-store].[2.2 Get Order By ID].1-Check if PathOrderID is the same in the Response\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).id).to.eql(Number(pm.collectionVariables.get('orderId')));\r",
+									"        console.log((JSON.parse(responseBody).id),(Number(pm.collectionVariables.get('orderId'))));\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[2-store].[2.2 Get Order By ID].2-Check if petId saved is the same in the Response\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).petId).to.eql(Number(pm.collectionVariables.get('petId')));\r",
+									"            console.log((JSON.parse(responseBody).petId),Number(pm.collectionVariables.get('petId')));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.2 Get Order By ID].3-Check if quantity saved is the same in the Response\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).quantity).to.be.equal(Number(pm.collectionVariables.get(\"quantity\")));\r",
+									"    console.log(Number(pm.collectionVariables.get(\"quantity\")),(JSON.parse(responseBody).quantity));\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.2 Get Order By ID].4-Check if shipDate saved is the same in the Response\", function () {\r",
+									"    pm.expect(pm.response.json().shipDate).to.be.equal(pm.collectionVariables.get(\"shippingDate\"));\r",
+									"    console.log(pm.collectionVariables.get(\"shippingDate\")),(pm.response.json().shipDate);\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.2 Get Order By ID].4-Check if status saved is the same in the Response\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).status).to.be.equal(pm.collectionVariables.get(\"statusType\"));\r",
+									"    console.log(pm.collectionVariables.get(\"statusType\"),((JSON.parse(responseBody).status)));\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.2 Get Order By ID].5-Check if CompleteStatus saved is the same in the Response\", function () {\r",
+									"    const responseCompleteStatus = JSON.parse(responseBody).complete;\r",
+									"    const collectionCompleteStatus = JSON.parse(pm.collectionVariables.get(\"completeStatus\"));\r",
+									"\r",
+									"    pm.expect(responseCompleteStatus).to.equal(collectionCompleteStatus);\r",
+									"\r",
+									"    // Log the values for debugging or verification\r",
+									"    console.log(responseCompleteStatus, collectionCompleteStatus);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/store/order/{{orderId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"store",
+								"order",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2.3 Delete Order by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"[2-store].[2.3 Delete Order By ID].1-Check if code field is 200\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).code).to.eql(200);\r",
+									"        console.log((JSON.parse(responseBody).code),(200));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.3 Delete Order By ID].2-Check if Type field is unkonwn\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).type).to.eql(\"unknown\");\r",
+									"        console.log((JSON.parse(responseBody).type),(\"unknown\"));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.3 Delete Order By ID].3-Check if Message field has the same Order ID to be deleted\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).message).to.eql(pm.collectionVariables.get('orderId'));\r",
+									"        console.log((JSON.parse(responseBody).message),(pm.collectionVariables.get('orderId')));\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/v2/store/order/{{orderId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"store",
+								"order",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2.4 Get Order by ID after Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"[2-store].[2.4 Get Order by ID after Delete].1-Check if message field has code 1\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).code).to.eql(1);\r",
+									"        console.log((JSON.parse(responseBody).code),(1));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.4 Get Order by ID after Delete].2-Check if message field has type error when order is deleted\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).type).to.eql(\"error\");\r",
+									"        console.log((JSON.parse(responseBody).type),(\"error\"));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[2-store].[2.4 Get Order by ID after Delete].3-Check if message field has Order not Found when order is deleted\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).message).to.eql(\"Order not found\");\r",
+									"        console.log((JSON.parse(responseBody).message),(\"Order not found\"));\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/v2/store/order/{{orderId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"store",
+								"order",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2.5 Get Pet inventories by status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/v2/store/inventory",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"store",
+								"inventory"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. User",
+			"item": [
+				{
+					"name": "3.1 Create user with array",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function generateRandomEmail() {\r",
+									"  const adjectives = ['happy', 'sunny', 'lucky', 'cool', 'clever', 'brave'];\r",
+									"  const nouns = ['coder', 'explorer', 'dreamer', 'runner', 'artist', 'hero'];\r",
+									"  const domains = ['gmail.com', 'yahoo.com', 'outlook.com', 'example.com', 'domain.com'];\r",
+									"\r",
+									"  const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];\r",
+									"  const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];\r",
+									"  const randomDomain = domains[Math.floor(Math.random() * domains.length)];\r",
+									"\r",
+									"  const randomNumber = Math.floor(Math.random() * 100);\r",
+									"\r",
+									"  return `${randomAdjective}${randomNoun}${randomNumber}@${randomDomain}`;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random email\r",
+									"const randomEmail = generateRandomEmail();\r",
+									"  pm.collectionVariables.set('randomEmail', randomEmail);\r",
+									"console.log('Random Email:', randomEmail);\r",
+									"\r",
+									"\r",
+									"\r",
+									"function generateRandomEgyptianMobileNumber() {\r",
+									"  const prefixes = ['011', '012', '010'];\r",
+									"  const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];\r",
+									"\r",
+									"  const randomNumber = Math.floor(10000000 + Math.random() * 90000000);\r",
+									"\r",
+									"  return randomPrefix + randomNumber;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random Egyptian mobile number\r",
+									"const randomMobileNumber = generateRandomEgyptianMobileNumber();\r",
+									"  pm.collectionVariables.set('randomMobileNumber', randomMobileNumber);\r",
+									"console.log('Random Egyptian Mobile Number:', randomMobileNumber);\r",
+									"\r",
+									"function generateRandomId(length) {\r",
+									"  const characters = '1234567890';\r",
+									"  let randomId = '';\r",
+									"\r",
+									"  for (let i = 0; i < length; i++) {\r",
+									"    const randomIndex = Math.floor(Math.random() * characters.length);\r",
+									"    randomId += characters.charAt(randomIndex);\r",
+									"  }\r",
+									"\r",
+									"  return randomId;\r",
+									"}\r",
+									"\r",
+									"// Example: Generate a random ID with a length of 8\r",
+									"const userID = generateRandomId(8);\r",
+									"  pm.collectionVariables.set('userID', userID);\r",
+									"console.log(\"Generated userID:\" , userID);\r",
+									"\r",
+									"////////////////random status 0 or 1////////////////////\r",
+									"function generateRandomStatus() {\r",
+									"  return Math.round(Math.random()); // Will return either 0 or 1\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random status\r",
+									"const randomStatus = generateRandomStatus();\r",
+									"pm.collectionVariables.set(\"randomStatus\",randomStatus);\r",
+									"console.log('Random Status:', randomStatus);\r",
+									"//////////////////random firstname,lastname,username////////////\r",
+									"function generateRandomUsername() {\r",
+									"  const firstNames = ['Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Frank', 'Grace', 'Henry'];\r",
+									"  const lastNames = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller'];\r",
+									"\r",
+									"  const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];\r",
+									"  pm.collectionVariables.set(\"randomFirstName\",randomFirstName);\r",
+									"  const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];\r",
+									"pm.collectionVariables.set(\"randomLastName\",randomLastName);\r",
+									"  return `${randomFirstName.toLowerCase()} ${randomLastName.toLowerCase()}`;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random username\r",
+									"const randomUsername = generateRandomUsername();\r",
+									"pm.collectionVariables.set(\"randomUsername\",randomUsername);\r",
+									"console.log('Random Username:', randomUsername);\r",
+									"/////////////////random password//////////////\r",
+									"function generateRandomPassword(length) {\r",
+									"  const specialCharacters = '!@#$%^&*()_-+=<>?';\r",
+									"  const allCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' + specialCharacters;\r",
+									"\r",
+									"  if (length < 8) {\r",
+									"    throw new Error('Password length must be at least 8 characters.');\r",
+									"  }\r",
+									"\r",
+									"  let password = '';\r",
+									"  for (let i = 0; i < length; i++) {\r",
+									"    if (i === 0) {\r",
+									"      // First character should not be a special character\r",
+									"      password += allCharacters.charAt(Math.floor(Math.random() * (allCharacters.length - specialCharacters.length)));\r",
+									"    } else {\r",
+									"      password += allCharacters.charAt(Math.floor(Math.random() * allCharacters.length));\r",
+									"    }\r",
+									"  }\r",
+									"\r",
+									"  return password;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random password with a length not less than 8\r",
+									"const randomPassword = generateRandomPassword(12); // You can adjust the length as needed\r",
+									"pm.environment.set(\"password\",randomPassword);\r",
+									"console.log('Random Password:', randomPassword);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"[3-User].[3.1 Create user with array].0-Check that Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[3-User].[3.1 Create user with array].1-Check if code field is 200\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).code).to.eql(200);\r",
+									"        console.log((JSON.parse(responseBody).code),(200));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.1 Create user with array].2-Check if Type field is unkonwn\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).type).to.eql(\"unknown\");\r",
+									"        console.log((JSON.parse(responseBody).type),(\"unknown\"));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.1 Create user with array].3-Check if Message field is OK\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).message).to.eql(\"ok\");\r",
+									"        console.log((JSON.parse(responseBody).message),\"ok\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"id\":{{userID}},\r\n    \"username\": \"{{randomUsername}}\",\r\n    \"firstName\": \"{{randomFirstName}}\",\r\n    \"lastName\": \"{{randomLastName}}\",\r\n    \"email\": \"{{randomEmail}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"phone\": \"{{randomMobileNumber}}\",\r\n    \"userStatus\": {{randomStatus}}\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/user/createWithArray",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"createWithArray"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2 Create user with List",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"[3-User].[3.2 Create user with List].0-Check that Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[3-User].[3.2 Create user with List].1-Check if code field is 200\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).code).to.eql(200);\r",
+									"        console.log((JSON.parse(responseBody).code),(200));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.2 Create user with List].2-Check if Type field is unkonwn\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).type).to.eql(\"unknown\");\r",
+									"        console.log((JSON.parse(responseBody).type),(\"unknown\"));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.2 Create user with List].3-Check if Message field is OK\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).message).to.eql(\"ok\");\r",
+									"        console.log((JSON.parse(responseBody).message),\"ok\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"id\":{{userID}},\r\n    \"username\": \"{{randomUsername}}\",\r\n    \"firstName\": \"{{randomFirstName}}\",\r\n    \"lastName\": \"{{randomLastName}}\",\r\n    \"email\": \"{{randomEmail}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"phone\": \"{{randomMobileNumber}}\",\r\n    \"userStatus\": {{randomStatus}}\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/user/createWithList",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"createWithList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.3 Get User by Username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// testcases\r",
+									"// 1- check status code is 200\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].1-Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"// toString(pm.collectionVariables.get(\"test\"))\r",
+									"\r",
+									"// 2- check response schema //////////////////////\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].2-Check Response include orderID property\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"id\")\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].3-Check Response include petId property\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"username\")\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].4-Check Response include firstName property\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"firstName\")\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].5-Check Response include lastName property\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"lastName\")\r",
+									"});\r",
+									"  pm.test(\"[3-User].[3.3 Get User by Username].6-Check Response include email property\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"email\")\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].7-Check Response include password property\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"password\")\r",
+									"});\r",
+									" pm.test(\"[3-User].[3.3 Get User by Username].8-Check Response include phone property\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"phone\")\r",
+									"});\r",
+									" pm.test(\"[3-User].[3.3 Get User by Username].9-Check Response include userStatus property\",function(){\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"userStatus\")\r",
+									"});\r",
+									"\r",
+									"////////////3-check values are not null or undefined////////////////////////////////////\r",
+									"\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].10-Check ID isnot null: \"+JSON.parse(responseBody).id,function(){\r",
+									"     pm.expect(JSON.parse(responseBody).id).to.not.equal(null);\r",
+									"     pm.expect(JSON.parse(responseBody).id).to.not.equal(undefined);\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].11-Check username isnot null: \"+JSON.parse(responseBody).username,function(){\r",
+									"     pm.expect(JSON.parse(responseBody).username).to.not.equal(null);\r",
+									"     pm.expect(JSON.parse(responseBody).username).to.not.equal(undefined);\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].12-Check firstName isnot null: \"+JSON.parse(responseBody).firstName,function(){\r",
+									"     pm.expect(JSON.parse(responseBody).firstName).to.not.equal(null);\r",
+									"     pm.expect(JSON.parse(responseBody).firstName).to.not.equal(undefined);\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].13-Check lastName isnot null: \"+JSON.parse(responseBody).lastName,function(){\r",
+									"     pm.expect(JSON.parse(responseBody).lastName).to.not.equal(null);\r",
+									"     pm.expect(JSON.parse(responseBody).lastName).to.not.equal(undefined);\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].14-Check status isnot null: \"+JSON.parse(responseBody).email,function(){\r",
+									"     pm.expect(JSON.parse(responseBody).email).to.not.equal(null);\r",
+									"     pm.expect(JSON.parse(responseBody).email).to.not.equal(undefined);\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].15-Check complete isnot null: \"+JSON.parse(responseBody).password,function(){\r",
+									"     pm.expect(JSON.parse(responseBody).password).to.not.equal(null);\r",
+									"     pm.expect(JSON.parse(responseBody).password).to.not.equal(undefined);\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].16-Check phone isnot null: \"+JSON.parse(responseBody).phone,function(){\r",
+									"     pm.expect(JSON.parse(responseBody).phone).to.not.equal(null);\r",
+									"     pm.expect(JSON.parse(responseBody).phone).to.not.equal(undefined);\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].17-Check userStatus isnot null: \"+JSON.parse(responseBody).userStatus,function(){\r",
+									"     pm.expect(JSON.parse(responseBody).userStatus).to.not.equal(null);\r",
+									"     pm.expect(JSON.parse(responseBody).userStatus).to.not.equal(undefined);\r",
+									"});\r",
+									"//////////////4-check Data Type Validation//////////////////////////////\r",
+									"// Test for Data Type Validation\r",
+									"\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].18-Data Type Validation: userID should be an integer\", function () {\r",
+									"  pm.expect(typeof JSON.parse(responseBody).id).to.eql(\"number\");\r",
+									"      pm.expect(JSON.parse(responseBody).id).to.be.a('number');\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].19-Data Type Validation: username should be an String\", function () {\r",
+									"  pm.expect(typeof JSON.parse(responseBody).username).to.eql(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].[TC20]-Data Type Validation: firstName should be a String\", function () {\r",
+									"  pm.expect(typeof JSON.parse(responseBody).firstName).to.eql(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].21-Data Type Validation: lastName should be a String\", function () {\r",
+									"  pm.expect(typeof JSON.parse(responseBody).lastName).to.eql(\"string\");\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].22-Data Type Validation: email should be a String\", function () {\r",
+									"  pm.expect(typeof JSON.parse(responseBody).email).to.eql(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].23-Data Type Validation: password should be a String\", function () {\r",
+									"  pm.expect(typeof JSON.parse(responseBody).password).to.eql(\"string\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].24-Data Type Validation: phone should be a String\", function () {\r",
+									"  pm.expect(typeof JSON.parse(responseBody).phone).to.eql(\"string\");\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].25-Data Type Validation: userStatus should be a Number\", function () {\r",
+									"  pm.expect(typeof JSON.parse(responseBody).userStatus).to.eql(\"number\");\r",
+									"});\r",
+									"\r",
+									"/////////////////////////5-check Actual with Expected////////////////////////////////////////////////\r",
+									"\r",
+									"\r",
+									"pm.test(\"[3-User].[3.3 Get User by Username].26-Actual and Expected Results:Check Pet ID value is \"+pm.collectionVariables.get(\"randomUsername\"),function(){\r",
+									"    pm.expect(pm.collectionVariables.get(\"randomUsername\")).to.be.equal(JSON.parse(responseBody).username);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/v2/user/{{randomUsername}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"{{randomUsername}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.4 Update user by username",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function generateRandomEmail() {\r",
+									"  const adjectives = ['happy', 'sunny', 'lucky', 'cool', 'clever', 'brave'];\r",
+									"  const nouns = ['coder', 'explorer', 'dreamer', 'runner', 'artist', 'hero'];\r",
+									"  const domains = ['gmail.com', 'yahoo.com', 'outlook.com', 'example.com', 'domain.com'];\r",
+									"\r",
+									"  const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];\r",
+									"  const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];\r",
+									"  const randomDomain = domains[Math.floor(Math.random() * domains.length)];\r",
+									"\r",
+									"  const randomNumber = Math.floor(Math.random() * 100);\r",
+									"\r",
+									"  return `${randomAdjective}${randomNoun}${randomNumber}@${randomDomain}`;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random email\r",
+									"const randomEmail = generateRandomEmail();\r",
+									"  pm.collectionVariables.set('updatedRandomEmail', randomEmail);\r",
+									"console.log('Random Email:', randomEmail);\r",
+									"\r",
+									"\r",
+									"\r",
+									"function generateRandomEgyptianMobileNumber() {\r",
+									"  const prefixes = ['011', '012', '010'];\r",
+									"  const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];\r",
+									"\r",
+									"  const randomNumber = Math.floor(10000000 + Math.random() * 90000000);\r",
+									"\r",
+									"  return randomPrefix + randomNumber;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random Egyptian mobile number\r",
+									"const randomMobileNumber = generateRandomEgyptianMobileNumber();\r",
+									"  pm.collectionVariables.set('updatedRandomMobileNumber', randomMobileNumber);\r",
+									"console.log('Random Egyptian Mobile Number:', randomMobileNumber);\r",
+									"\r",
+									"function generateRandomId(length) {\r",
+									"  const characters = '1234567890';\r",
+									"  let randomId = '';\r",
+									"\r",
+									"  for (let i = 0; i < length; i++) {\r",
+									"    const randomIndex = Math.floor(Math.random() * characters.length);\r",
+									"    randomId += characters.charAt(randomIndex);\r",
+									"  }\r",
+									"\r",
+									"  return randomId;\r",
+									"}\r",
+									"\r",
+									"// Example: Generate a random ID with a length of 8\r",
+									"const userID = generateRandomId(8);\r",
+									"  pm.collectionVariables.set('updatedRandomUserID', userID);\r",
+									"console.log(\"Generated userID:\" , userID);\r",
+									"\r",
+									"////////////////random status 0 or 1////////////////////\r",
+									"function generateRandomStatus() {\r",
+									"  return Math.round(Math.random()); // Will return either 0 or 1\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random status\r",
+									"const randomStatus = generateRandomStatus();\r",
+									"pm.collectionVariables.set(\"updatedRandomStatus\",randomStatus);\r",
+									"console.log('Random Status:', randomStatus);\r",
+									"//////////////////random firstname,lastname,username////////////\r",
+									"function generateRandomUsername() {\r",
+									"  const firstNames = ['Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Frank', 'Grace', 'Henry'];\r",
+									"  const lastNames = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller'];\r",
+									"\r",
+									"  const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];\r",
+									"  pm.collectionVariables.set(\"updatedRandomFirstName\",randomFirstName);\r",
+									"  const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];\r",
+									"pm.collectionVariables.set(\"updatedRandomLastName\",randomLastName);\r",
+									"  return `${randomFirstName.toLowerCase()} ${randomLastName.toLowerCase()}`;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random username\r",
+									"const randomUsername = generateRandomUsername();\r",
+									"pm.collectionVariables.set(\"updatedRandomUsername\",randomUsername);\r",
+									"console.log('Random Username:', randomUsername);\r",
+									"/////////////////random password//////////////\r",
+									"function generateRandomPassword(length) {\r",
+									"  const specialCharacters = '!@#$%^&*()_-+=<>?';\r",
+									"  const allCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' + specialCharacters;\r",
+									"\r",
+									"  if (length < 8) {\r",
+									"    throw new Error('Password length must be at least 8 characters.');\r",
+									"  }\r",
+									"\r",
+									"  let password = '';\r",
+									"  for (let i = 0; i < length; i++) {\r",
+									"    if (i === 0) {\r",
+									"      // First character should not be a special character\r",
+									"      password += allCharacters.charAt(Math.floor(Math.random() * (allCharacters.length - specialCharacters.length)));\r",
+									"    } else {\r",
+									"      password += allCharacters.charAt(Math.floor(Math.random() * allCharacters.length));\r",
+									"    }\r",
+									"  }\r",
+									"\r",
+									"  return password;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random password with a length not less than 8\r",
+									"const randomPassword = generateRandomPassword(12); // You can adjust the length as needed\r",
+									"pm.environment.set(\"updatedPassword\",randomPassword);\r",
+									"console.log('Random Password:', randomPassword);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"[3-User].[3.4 Get user after update ].[TC-1]-Check if code field is 200\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).code).to.eql(200);\r",
+									"        console.log((JSON.parse(responseBody).code),(200));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.4 Get user after update ].[TC-2]-Check if Type field is unkonwn\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).type).to.eql(\"unknown\");\r",
+									"        console.log((JSON.parse(responseBody).type),(\"unknown\"));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.4 Get user after update ].[TC-3]-Check if Message field has the same Order ID to be deleted\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).message).to.eql(String(pm.collectionVariables.get('updatedRandomUserID')));\r",
+									"        console.log((JSON.parse(responseBody).message),(pm.collectionVariables.get('updatedRandomUserID')));\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n  {\r\n    \"id\":{{updatedRandomUserID}},\r\n    \"username\": \"{{updatedRandomUsername}}\",\r\n    \"firstName\": \"{{updatedRandomFirstName}}\",\r\n    \"lastName\": \"{{updatedRandomLastName}}\",\r\n    \"email\": \"{{updatedRandomEmail}}\",\r\n    \"password\": \"{{updatedPassword}}\",\r\n    \"phone\": \"{{updatedRandomMobileNumber}}\",\r\n    \"userStatus\": {{updatedRandomStatus}}\r\n  } \r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/user/{{randomUsername}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"{{randomUsername}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.5 Get user after update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"///////////////check actual as expected//////////////////////////////\r",
+									"pm.test(\"[3-User].[3.5 Get user after Update].1-Check if the response userid is the same in collection\", function () {\r",
+									"    pm.expect(String (JSON.parse(responseBody).id)).to.eql(pm.collectionVariables.get('updatedRandomUserID'));\r",
+									"        console.log(String(JSON.parse(responseBody).message),(pm.collectionVariables.get('updatedRandomUserID')));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.5 Get user after Update].2-Check if the response username is the same in collection\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).username).to.eql(pm.collectionVariables.get('updatedRandomUsername'));\r",
+									"        console.log((JSON.parse(responseBody).username),(pm.collectionVariables.get('updatedRandomUsername')));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.5 Get user after Update].4-Check if the response firstName is the same in collection\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).firstName).to.eql(pm.collectionVariables.get('updatedRandomFirstName'));\r",
+									"        console.log((JSON.parse(responseBody).firstName),(pm.collectionVariables.get('updatedRandomFirstName')));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.5 Get user after Update].5-Check if the response lastName is the same in collection\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).lastName).to.eql(pm.collectionVariables.get('updatedRandomLastName'));\r",
+									"        console.log((JSON.parse(responseBody).lastName),(pm.collectionVariables.get('updatedRandomLastName')));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.5 Get user after Update].6-Check if the response email is the same in collection\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).email).to.eql(pm.collectionVariables.get('updatedRandomEmail'));\r",
+									"        console.log((JSON.parse(responseBody).email),(pm.collectionVariables.get('updatedRandomEmail')));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.5 Get user after Update].7-Check if the response password is the same in collection\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).password).to.eql(pm.environment.get('updatedPassword'));\r",
+									"        console.log((JSON.parse(responseBody).password),(pm.environment.get('updatedPassword')));\r",
+									"\r",
+									"});pm.test(\"[3-User].[3.5 Get user after Update].8-Check if the response phone is the same in collection\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).phone).to.eql(pm.collectionVariables.get('updatedRandomMobileNumber'));\r",
+									"        console.log((JSON.parse(responseBody).phone),(pm.collectionVariables.get('updatedRandomMobileNumber')));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.5 Get user after Update].9-Check if the response userStatus is the same in collection\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).userStatus).to.eql(pm.collectionVariables.get('updatedRandomStatus'));\r",
+									"        console.log((JSON.parse(responseBody).userStatus),(pm.collectionVariables.get('updatedRandomStatus')));\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/v2/user/{{updatedRandomUsername}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"{{updatedRandomUsername}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.6 Delete User by username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"[3-User].[3.6 Delete User By UserName].1-Check if code field is 200\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).code).to.eql(200);\r",
+									"        console.log((JSON.parse(responseBody).code),(200));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.6 Delete User By UserName].2-Check if Type field is unkonwn\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).type).to.eql(\"unknown\");\r",
+									"        console.log((JSON.parse(responseBody).type),(\"unknown\"));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.6 Delete User By UserName].3-Check if Message field has the same username to be deleted\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).message).to.eql(pm.collectionVariables.get('randomUsername'));\r",
+									"        console.log((JSON.parse(responseBody).message),(pm.collectionVariables.get('randomUsername')));\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/v2/user/{{randomUsername}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"{{randomUsername}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.7 Get user after Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"[3-User].[3.7 Get User by username after Delete].1-Check if message field has code 1\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).code).to.eql(1);\r",
+									"        console.log((JSON.parse(responseBody).code),(1));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.7 Get User by Username after Delete].2-Check if message field has type error when user is deleted\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).type).to.eql(\"error\");\r",
+									"        console.log((JSON.parse(responseBody).type),(\"error\"));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.7 Get User by username after Delete].3-Check if message field has User not Found when User is deleted\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).message).to.eql(\"User not found\");\r",
+									"        console.log((JSON.parse(responseBody).message),(\"User not found\"));\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/v2/user/{{randomUsername}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"{{randomUsername}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.8 User Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/v2/user/login?username={{randomUsername}}&password={{password}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "{{randomUsername}}"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.9 User Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"[3-User].[3.9 User Logout].1-Check if code field is 200\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).code).to.eql(200);\r",
+									"        console.log((JSON.parse(responseBody).code),(200));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.9 User Logout].2-Check if Type field is unkonwn\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).type).to.eql(\"unknown\");\r",
+									"        console.log((JSON.parse(responseBody).type),(\"unknown\"));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.9 User Logout].3-Check if Message field has OK\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).message).to.eql(\"ok\");\r",
+									"        console.log((JSON.parse(responseBody).message),(\"ok\"));\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/v2/user/logout",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.10 Create User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function generateRandomEmail() {\r",
+									"  const adjectives = ['happy', 'sunny', 'lucky', 'cool', 'clever', 'brave'];\r",
+									"  const nouns = ['coder', 'explorer', 'dreamer', 'runner', 'artist', 'hero'];\r",
+									"  const domains = ['gmail.com', 'yahoo.com', 'outlook.com', 'example.com', 'domain.com'];\r",
+									"\r",
+									"  const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];\r",
+									"  const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];\r",
+									"  const randomDomain = domains[Math.floor(Math.random() * domains.length)];\r",
+									"\r",
+									"  const randomNumber = Math.floor(Math.random() * 100);\r",
+									"\r",
+									"  return `${randomAdjective}${randomNoun}${randomNumber}@${randomDomain}`;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random email\r",
+									"const randomEmail = generateRandomEmail();\r",
+									"  pm.collectionVariables.set('randomEmail', randomEmail);\r",
+									"console.log('Random Email:', randomEmail);\r",
+									"\r",
+									"\r",
+									"\r",
+									"function generateRandomEgyptianMobileNumber() {\r",
+									"  const prefixes = ['011', '012', '010'];\r",
+									"  const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];\r",
+									"\r",
+									"  const randomNumber = Math.floor(10000000 + Math.random() * 90000000);\r",
+									"\r",
+									"  return randomPrefix + randomNumber;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random Egyptian mobile number\r",
+									"const randomMobileNumber = generateRandomEgyptianMobileNumber();\r",
+									"  pm.collectionVariables.set('randomMobileNumber', randomMobileNumber);\r",
+									"console.log('Random Egyptian Mobile Number:', randomMobileNumber);\r",
+									"\r",
+									"function generateRandomId(length) {\r",
+									"  const characters = '1234567890';\r",
+									"  let randomId = '';\r",
+									"\r",
+									"  for (let i = 0; i < length; i++) {\r",
+									"    const randomIndex = Math.floor(Math.random() * characters.length);\r",
+									"    randomId += characters.charAt(randomIndex);\r",
+									"  }\r",
+									"\r",
+									"  return randomId;\r",
+									"}\r",
+									"\r",
+									"// Example: Generate a random ID with a length of 8\r",
+									"const userID = generateRandomId(8);\r",
+									"  pm.collectionVariables.set('userID', userID);\r",
+									"console.log(\"Generated userID:\" , userID);\r",
+									"\r",
+									"////////////////random status 0 or 1////////////////////\r",
+									"function generateRandomStatus() {\r",
+									"  return Math.round(Math.random()); // Will return either 0 or 1\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random status\r",
+									"const randomStatus = generateRandomStatus();\r",
+									"pm.collectionVariables.set(\"randomStatus\",randomStatus);\r",
+									"console.log('Random Status:', randomStatus);\r",
+									"//////////////////random firstname,lastname,username////////////\r",
+									"function generateRandomUsername() {\r",
+									"  const firstNames = ['Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Frank', 'Grace', 'Henry'];\r",
+									"  const lastNames = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller'];\r",
+									"\r",
+									"  const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];\r",
+									"  pm.collectionVariables.set(\"randomFirstName\",randomFirstName);\r",
+									"  const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];\r",
+									"pm.collectionVariables.set(\"randomLastName\",randomLastName);\r",
+									"  return `${randomFirstName.toLowerCase()} ${randomLastName.toLowerCase()}`;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random username\r",
+									"const randomUsername = generateRandomUsername();\r",
+									"pm.collectionVariables.set(\"randomUsername\",randomUsername);\r",
+									"console.log('Random Username:', randomUsername);\r",
+									"/////////////////random password//////////////\r",
+									"function generateRandomPassword(length) {\r",
+									"  const specialCharacters = '!@#$%^&*()_-+=<>?';\r",
+									"  const allCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' + specialCharacters;\r",
+									"\r",
+									"  if (length < 8) {\r",
+									"    throw new Error('Password length must be at least 8 characters.');\r",
+									"  }\r",
+									"\r",
+									"  let password = '';\r",
+									"  for (let i = 0; i < length; i++) {\r",
+									"    if (i === 0) {\r",
+									"      // First character should not be a special character\r",
+									"      password += allCharacters.charAt(Math.floor(Math.random() * (allCharacters.length - specialCharacters.length)));\r",
+									"    } else {\r",
+									"      password += allCharacters.charAt(Math.floor(Math.random() * allCharacters.length));\r",
+									"    }\r",
+									"  }\r",
+									"\r",
+									"  return password;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random password with a length not less than 8\r",
+									"const randomPassword = generateRandomPassword(12); // You can adjust the length as needed\r",
+									"pm.environment.set(\"password\",randomPassword);\r",
+									"console.log('Random Password:', randomPassword);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"[3-User].[3.10 Create user ].0-Check that Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[3-User].[3.10 Create user].1-Check if code field is 200\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).code).to.eql(200);\r",
+									"        console.log((JSON.parse(responseBody).code),(200));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.10 Create user ].2-Check if Type field is unkonwn\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).type).to.eql(\"unknown\");\r",
+									"        console.log((JSON.parse(responseBody).type),(\"unknown\"));\r",
+									"\r",
+									"});\r",
+									"pm.test(\"[3-User].[3.10 Create user ].3-Check if Message field is OK\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).message).to.eql(pm.collectionVariables.get(\"userID\"));\r",
+									"        console.log((JSON.parse(responseBody).message),pm.collectionVariables.get(\"userID\"));\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":{{userID}},\r\n    \"username\": \"{{randomUsername}}\",\r\n    \"firstName\": \"{{randomFirstName}}\",\r\n    \"lastName\": \"{{randomLastName}}\",\r\n    \"email\": \"{{randomEmail}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"phone\": \"{{randomMobileNumber}}\",\r\n    \"userStatus\": {{randomStatus}}\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/user",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "statusType",
+			"value": ""
+		},
+		{
+			"key": "completeStatus",
+			"value": ""
+		},
+		{
+			"key": "orderId",
+			"value": ""
+		},
+		{
+			"key": "petId",
+			"value": ""
+		},
+		{
+			"key": "shippingDate",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"value": "",
+			"type": "string"
+		},
+		{
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "quantity",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
+		},
+		{
+			"key": "firstName",
+			"value": ""
+		},
+		{
+			"key": "lastName",
+			"value": ""
+		},
+		{
+			"key": "userName",
+			"value": ""
+		},
+		{
+			"key": "randomEmail",
+			"value": ""
+		},
+		{
+			"key": "randomMobileNumber",
+			"value": ""
+		},
+		{
+			"key": "userID",
+			"value": ""
+		},
+		{
+			"key": "randomStatus",
+			"value": ""
+		},
+		{
+			"key": "randomFirstName",
+			"value": ""
+		},
+		{
+			"key": "randomLastName",
+			"value": ""
+		},
+		{
+			"key": "randomUsername",
+			"value": ""
+		},
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "catId",
+			"value": ""
+		},
+		{
+			"key": "tagID",
+			"value": ""
+		},
+		{
+			"key": "categoryname",
+			"value": ""
+		},
+		{
+			"key": "petName",
+			"value": ""
+		},
+		{
+			"key": "tagName",
+			"value": ""
+		},
+		{
+			"key": "petID",
+			"value": ""
+		},
+		{
+			"key": "status",
+			"value": ""
+		},
+		{
+			"key": "randomLink",
+			"value": ""
+		},
+		{
+			"key": "shipDate",
+			"value": ""
+		},
+		{
+			"key": "updatedStatus",
+			"value": ""
+		},
+		{
+			"key": "updatedPetID",
+			"value": ""
+		},
+		{
+			"key": "updatedCatId",
+			"value": ""
+		},
+		{
+			"key": "updatedTagID",
+			"value": ""
+		},
+		{
+			"key": "updatedCategoryname",
+			"value": ""
+		},
+		{
+			"key": "updatedPetName",
+			"value": ""
+		},
+		{
+			"key": "updatedTagName",
+			"value": ""
+		},
+		{
+			"key": "updatedStatusType",
+			"value": ""
+		},
+		{
+			"key": "updatedRandomLink",
+			"value": ""
+		},
+		{
+			"key": "updatedRandomEmail",
+			"value": ""
+		},
+		{
+			"key": "updatedRandomMobileNumber",
+			"value": ""
+		},
+		{
+			"key": "updatedUserID",
+			"value": ""
+		},
+		{
+			"key": "updatedRandomStatus",
+			"value": ""
+		},
+		{
+			"key": "updatedRandomFirstName",
+			"value": ""
+		},
+		{
+			"key": "updatedRandomLastName",
+			"value": ""
+		},
+		{
+			"key": "updatedRandomUsername",
+			"value": ""
+		},
+		{
+			"key": "updatedRandomUserID",
+			"value": ""
+		}
+	]
+}
