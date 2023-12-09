@@ -1490,9 +1490,9 @@
 									"    pm.expect(JSON.parse(request.data).id).to.be.equal((JSON.parse(responseBody).id).toString());\r",
 									"});\r",
 									"\r",
-									"pm.test(\"[2-store].[2.1 Place order for a pet].[TC20]-Actual and Expected Results:Check Pet ID value is \"+JSON.parse(request.data).petId,function(){\r",
-									"    pm.expect(JSON.parse(request.data).petId).to.be.equal(JSON.parse(responseBody).petId);\r",
-									"});\r",
+									"// pm.test(\"[2-store].[2.1 Place order for a pet].[TC20]-Actual and Expected Results:Check Pet ID value is \"+JSON.parse(request.data).petId,function(){\r",
+									"//     pm.expect(JSON.parse(request.data).petId).to.be.equal(JSON.parse(responseBody).petId);\r",
+									"// });\r",
 									"pm.test(\"[2-store].[2.1 Place order for a pet].[TC21]-Actual and Expected Results:Check Quantity value is \"+JSON.parse(request.data).quantity,function(){\r",
 									"    pm.expect(JSON.parse(request.data).quantity).to.be.equal(JSON.parse(responseBody).quantity);\r",
 									"});\r",
@@ -2779,6 +2779,246 @@
 					"response": []
 				},
 				{
+					"name": "3.10 CreateUser",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function generateRandomEmail() {\r",
+									"  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';\r",
+									"  const domains = [\r",
+									"    'gmail.com',\r",
+									"    'yahoo.com',\r",
+									"    'hotmail.com',\r",
+									"    'outlook.com',\r",
+									"    'protonmail.com',\r",
+									"    'zoho.com',\r",
+									"  ];\r",
+									"\r",
+									"  const usernameLength = Math.floor(Math.random() * 10) + 5;\r",
+									"  const domainIndex = Math.floor(Math.random() * domains.length);\r",
+									"\r",
+									"  let username = '';\r",
+									"  for (let i = 0; i < usernameLength; i++) {\r",
+									"    const randomIndex = Math.floor(Math.random() * alphabet.length);\r",
+									"    username += alphabet[randomIndex];\r",
+									"  }\r",
+									"\r",
+									"  return `${username}@${domains[domainIndex]}`;\r",
+									"}\r",
+									"// Example: Get a random email\r",
+									"const randomEmail = generateRandomEmail();\r",
+									"  pm.collectionVariables.set('randomEmail', randomEmail);\r",
+									"console.log('Random Email:', randomEmail);\r",
+									"\r",
+									"\r",
+									"\r",
+									"function generateRandomEgyptianMobileNumber() {\r",
+									"  const prefixes = ['011', '012', '010'];\r",
+									"  const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];\r",
+									"\r",
+									"  const randomNumber = Math.floor(10000000 + Math.random() * 90000000);\r",
+									"\r",
+									"  return randomPrefix + randomNumber;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random Egyptian mobile number\r",
+									"const randomMobileNumber = generateRandomEgyptianMobileNumber();\r",
+									"  pm.collectionVariables.set('randomMobileNumber', randomMobileNumber);\r",
+									"console.log('Random Egyptian Mobile Number:', randomMobileNumber);\r",
+									"\r",
+									"function generateRandomId(length) {\r",
+									"  const characters = '1234567890';\r",
+									"  let randomId = '';\r",
+									"\r",
+									"  for (let i = 0; i < length; i++) {\r",
+									"    const randomIndex = Math.floor(Math.random() * characters.length);\r",
+									"    randomId += characters.charAt(randomIndex);\r",
+									"  }\r",
+									"\r",
+									"  return randomId;\r",
+									"}\r",
+									"\r",
+									"// Example: Generate a random ID with a length of 8\r",
+									"const userID = generateRandomId(8);\r",
+									"  pm.collectionVariables.set('userID', userID);\r",
+									"console.log(\"Generated userID:\" , userID);\r",
+									"\r",
+									"////////////////random status 0 or 1////////////////////\r",
+									"function generateRandomStatus() {\r",
+									"  return Math.round(Math.random()); // Will return either 0 or 1\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random status\r",
+									"const randomStatus = generateRandomStatus();\r",
+									"pm.collectionVariables.set(\"randomStatus\",randomStatus);\r",
+									"console.log('Random Status:', randomStatus);\r",
+									"//////////////////random firstname,lastname,username////////////\r",
+									"function generateRandomUsername() {\r",
+									"  const firstNames = ['Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Frank', 'Grace', 'Henry'];\r",
+									"  const lastNames = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller'];\r",
+									"\r",
+									"  const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];\r",
+									"  pm.collectionVariables.set(\"randomFirstName\",randomFirstName);\r",
+									"  const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];\r",
+									"pm.collectionVariables.set(\"randomLastName\",randomLastName);\r",
+									"  return `${randomFirstName.toLowerCase()} ${randomLastName.toLowerCase()}`;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random username\r",
+									"const randomUsername = generateRandomUsername();\r",
+									"pm.collectionVariables.set(\"randomUsername\",randomUsername);\r",
+									"console.log('Random Username:', randomUsername);\r",
+									"/////////////////random password//////////////\r",
+									"function generateRandomPassword(length) {\r",
+									"  const specialCharacters = '!@#$%^&*()_-+=<>?';\r",
+									"  const allCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' + specialCharacters;\r",
+									"\r",
+									"  if (length < 8) {\r",
+									"    throw new Error('Password length must be at least 8 characters.');\r",
+									"  }\r",
+									"\r",
+									"  let password = '';\r",
+									"  for (let i = 0; i < length; i++) {\r",
+									"    if (i === 0) {\r",
+									"      // First character should not be a special character\r",
+									"      password += allCharacters.charAt(Math.floor(Math.random() * (allCharacters.length - specialCharacters.length)));\r",
+									"    } else {\r",
+									"      password += allCharacters.charAt(Math.floor(Math.random() * allCharacters.length));\r",
+									"    }\r",
+									"  }\r",
+									"\r",
+									"  return password;\r",
+									"}\r",
+									"\r",
+									"// Example: Get a random password with a length not less than 8\r",
+									"const randomPassword = generateRandomPassword(12); // You can adjust the length as needed\r",
+									"pm.environment.set(\"password\",randomPassword);\r",
+									"console.log('Random Password:', randomPassword);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//check status code is 200\r",
+									"pm.test(\"[3.User][3.10CreateUser][TC1]- Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"// ****************************************** TCS for code  *****************************************\r",
+									"\r",
+									"//check response body contain code property \r",
+									"pm.test(\"[3.User][3.10CreateUser][TC2]- Check respose schema contain code property\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"code\")\r",
+									"});\r",
+									"//check code is not null\r",
+									"pm.test(\"[3.User][3.10CreateUser][TC3]- Check code is not null\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).code).to.not.equal(null)\r",
+									"    pm.expect(JSON.parse(responseBody).code).to.not.equal(undefined)\r",
+									"});\r",
+									"//check code value is integer/number (data type)\r",
+									"pm.test(\"[3.User][3.10CreateUser][TC4]- Check code is number/data type \", function () {\r",
+									"    pm.expect(typeof JSON.parse(responseBody).code).to.be.equal('number')\r",
+									"});\r",
+									"//Check code value   is 200  \r",
+									"pm.test(\"[3.User][3.1CreateUserArr][TC5]-Check code value is 200 \", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).code).to.be.equal(200)\r",
+									"        console.log((JSON.parse(responseBody).code),(200));\r",
+									"\r",
+									"});\r",
+									"//Check code length is less than 4 digit\r",
+									"pm.test(\"[3.User][3.10CreateUser][TC6]-Check code length is less than 4 digits \", function () {\r",
+									"    pm.expect((JSON.parse(responseBody).code).toString().length).to.be.lessThan(4)\r",
+									"});\r",
+									"//Check code is includes numbers only\r",
+									"pm.test(\"[3.User][3.10CreateUser][TC7]-Check code is includes numbers only\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).code).to.match(/^\\d+$/)\r",
+									"});\r",
+									"// ****************************************** TCS for type  *****************************************\r",
+									"\r",
+									"//(check response body contain type property \r",
+									"pm.test(\"[3.User][3.10CreateUser][TC8]- Check respose schema contain type property\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"type\")\r",
+									"});\r",
+									"//check type is not null\r",
+									"pm.test(\"[3.User][3.10CreateUser][TC9]- Check type is not null\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).type).to.not.equal(null)\r",
+									"    pm.expect(JSON.parse(responseBody).type).to.not.equal(undefined)\r",
+									"});\r",
+									"//check type value is string/number (data type)\r",
+									"pm.test(\"[3.User][3.10CreateUser][TC10]- Check type is string/data type \", function () {\r",
+									"    pm.expect(typeof JSON.parse(responseBody).type).to.be.equal('string')\r",
+									"});\r",
+									"//Check type value on response\r",
+									"pm.test(\"[3.User][3.10CreateUser][TC11]-Check type value on response \", function () {\r",
+									"    pm.expect( JSON.parse(responseBody).type).to.be.equal('unknown')\r",
+									"        console.log((JSON.parse(responseBody).type),(\"unknown\"));\r",
+									"\r",
+									"});\r",
+									"//Check type is includes letters only\r",
+									"pm.test(\"[3.User][3.10CreateUser][TC12]-Check type is includes letters only\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).type).to.match(/^[a-zA-Z]+$/)\r",
+									"});\r",
+									"\r",
+									"// ****************************************** TCS for message  *****************************************\r",
+									"\r",
+									"//check response body contain message property \r",
+									"pm.test(\"[3.User][3.1CreateUserArr][TC13]- Check respose schema contain message property\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"message\")\r",
+									"});\r",
+									"//check message is not null\r",
+									"pm.test(\"[3.User][3.10CreateUser][TC14]- Check message is not null\", function () {\r",
+									"    pm.expect(JSON.parse(responseBody).message).to.not.equal(null)\r",
+									"    pm.expect(JSON.parse(responseBody).message).to.not.equal(undefined)\r",
+									"});\r",
+									"//check message value is string (data type)\r",
+									"pm.test(\"[3.User][3.10CreateUser][TC15]- Check message is String/data type \", function () {\r",
+									"    pm.expect(typeof JSON.parse(responseBody).message).to.be.equal('string')\r",
+									"});\r",
+									"//Check message value on response\r",
+									"pm.test(\"[3.User][3.10CreateUser][TC16]-Check message value on response \", function () {\r",
+									"    pm.expect( JSON.parse(responseBody).message).to.be.equal(pm.collectionVariables.get(\"userID\"))\r",
+									"        console.log((JSON.parse(responseBody).message),(pm.collectionVariables.get(\"userID\")));\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"id\":{{userID}},\r\n    \"username\": \"{{randomUsername}}\",\r\n    \"firstName\": \"{{randomFirstName}}\",\r\n    \"lastName\": \"{{randomLastName}}\",\r\n    \"email\": \"{{randomEmail}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"phone\": \"{{randomMobileNumber}}\",\r\n    \"userStatus\": {{randomStatus}}\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/user",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "3.3 Get User by Username",
 					"event": [
 						{
@@ -3901,246 +4141,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "3.10 CreateUser",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"function generateRandomEmail() {\r",
-									"  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';\r",
-									"  const domains = [\r",
-									"    'gmail.com',\r",
-									"    'yahoo.com',\r",
-									"    'hotmail.com',\r",
-									"    'outlook.com',\r",
-									"    'protonmail.com',\r",
-									"    'zoho.com',\r",
-									"  ];\r",
-									"\r",
-									"  const usernameLength = Math.floor(Math.random() * 10) + 5;\r",
-									"  const domainIndex = Math.floor(Math.random() * domains.length);\r",
-									"\r",
-									"  let username = '';\r",
-									"  for (let i = 0; i < usernameLength; i++) {\r",
-									"    const randomIndex = Math.floor(Math.random() * alphabet.length);\r",
-									"    username += alphabet[randomIndex];\r",
-									"  }\r",
-									"\r",
-									"  return `${username}@${domains[domainIndex]}`;\r",
-									"}\r",
-									"// Example: Get a random email\r",
-									"const randomEmail = generateRandomEmail();\r",
-									"  pm.collectionVariables.set('randomEmail', randomEmail);\r",
-									"console.log('Random Email:', randomEmail);\r",
-									"\r",
-									"\r",
-									"\r",
-									"function generateRandomEgyptianMobileNumber() {\r",
-									"  const prefixes = ['011', '012', '010'];\r",
-									"  const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];\r",
-									"\r",
-									"  const randomNumber = Math.floor(10000000 + Math.random() * 90000000);\r",
-									"\r",
-									"  return randomPrefix + randomNumber;\r",
-									"}\r",
-									"\r",
-									"// Example: Get a random Egyptian mobile number\r",
-									"const randomMobileNumber = generateRandomEgyptianMobileNumber();\r",
-									"  pm.collectionVariables.set('randomMobileNumber', randomMobileNumber);\r",
-									"console.log('Random Egyptian Mobile Number:', randomMobileNumber);\r",
-									"\r",
-									"function generateRandomId(length) {\r",
-									"  const characters = '1234567890';\r",
-									"  let randomId = '';\r",
-									"\r",
-									"  for (let i = 0; i < length; i++) {\r",
-									"    const randomIndex = Math.floor(Math.random() * characters.length);\r",
-									"    randomId += characters.charAt(randomIndex);\r",
-									"  }\r",
-									"\r",
-									"  return randomId;\r",
-									"}\r",
-									"\r",
-									"// Example: Generate a random ID with a length of 8\r",
-									"const userID = generateRandomId(8);\r",
-									"  pm.collectionVariables.set('userID', userID);\r",
-									"console.log(\"Generated userID:\" , userID);\r",
-									"\r",
-									"////////////////random status 0 or 1////////////////////\r",
-									"function generateRandomStatus() {\r",
-									"  return Math.round(Math.random()); // Will return either 0 or 1\r",
-									"}\r",
-									"\r",
-									"// Example: Get a random status\r",
-									"const randomStatus = generateRandomStatus();\r",
-									"pm.collectionVariables.set(\"randomStatus\",randomStatus);\r",
-									"console.log('Random Status:', randomStatus);\r",
-									"//////////////////random firstname,lastname,username////////////\r",
-									"function generateRandomUsername() {\r",
-									"  const firstNames = ['Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Frank', 'Grace', 'Henry'];\r",
-									"  const lastNames = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller'];\r",
-									"\r",
-									"  const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];\r",
-									"  pm.collectionVariables.set(\"randomFirstName\",randomFirstName);\r",
-									"  const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];\r",
-									"pm.collectionVariables.set(\"randomLastName\",randomLastName);\r",
-									"  return `${randomFirstName.toLowerCase()} ${randomLastName.toLowerCase()}`;\r",
-									"}\r",
-									"\r",
-									"// Example: Get a random username\r",
-									"const randomUsername = generateRandomUsername();\r",
-									"pm.collectionVariables.set(\"randomUsername\",randomUsername);\r",
-									"console.log('Random Username:', randomUsername);\r",
-									"/////////////////random password//////////////\r",
-									"function generateRandomPassword(length) {\r",
-									"  const specialCharacters = '!@#$%^&*()_-+=<>?';\r",
-									"  const allCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' + specialCharacters;\r",
-									"\r",
-									"  if (length < 8) {\r",
-									"    throw new Error('Password length must be at least 8 characters.');\r",
-									"  }\r",
-									"\r",
-									"  let password = '';\r",
-									"  for (let i = 0; i < length; i++) {\r",
-									"    if (i === 0) {\r",
-									"      // First character should not be a special character\r",
-									"      password += allCharacters.charAt(Math.floor(Math.random() * (allCharacters.length - specialCharacters.length)));\r",
-									"    } else {\r",
-									"      password += allCharacters.charAt(Math.floor(Math.random() * allCharacters.length));\r",
-									"    }\r",
-									"  }\r",
-									"\r",
-									"  return password;\r",
-									"}\r",
-									"\r",
-									"// Example: Get a random password with a length not less than 8\r",
-									"const randomPassword = generateRandomPassword(12); // You can adjust the length as needed\r",
-									"pm.environment.set(\"password\",randomPassword);\r",
-									"console.log('Random Password:', randomPassword);\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"//check status code is 200\r",
-									"pm.test(\"[3.User][3.10CreateUser][TC1]- Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"// ****************************************** TCS for code  *****************************************\r",
-									"\r",
-									"//check response body contain code property \r",
-									"pm.test(\"[3.User][3.10CreateUser][TC2]- Check respose schema contain code property\", function () {\r",
-									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"code\")\r",
-									"});\r",
-									"//check code is not null\r",
-									"pm.test(\"[3.User][3.10CreateUser][TC3]- Check code is not null\", function () {\r",
-									"    pm.expect(JSON.parse(responseBody).code).to.not.equal(null)\r",
-									"    pm.expect(JSON.parse(responseBody).code).to.not.equal(undefined)\r",
-									"});\r",
-									"//check code value is integer/number (data type)\r",
-									"pm.test(\"[3.User][3.10CreateUser][TC4]- Check code is number/data type \", function () {\r",
-									"    pm.expect(typeof JSON.parse(responseBody).code).to.be.equal('number')\r",
-									"});\r",
-									"//Check code value   is 200  \r",
-									"pm.test(\"[3.User][3.1CreateUserArr][TC5]-Check code value is 200 \", function () {\r",
-									"    pm.expect(JSON.parse(responseBody).code).to.be.equal(200)\r",
-									"        console.log((JSON.parse(responseBody).code),(200));\r",
-									"\r",
-									"});\r",
-									"//Check code length is less than 4 digit\r",
-									"pm.test(\"[3.User][3.10CreateUser][TC6]-Check code length is less than 4 digits \", function () {\r",
-									"    pm.expect((JSON.parse(responseBody).code).toString().length).to.be.lessThan(4)\r",
-									"});\r",
-									"//Check code is includes numbers only\r",
-									"pm.test(\"[3.User][3.10CreateUser][TC7]-Check code is includes numbers only\", function () {\r",
-									"    pm.expect(JSON.parse(responseBody).code).to.match(/^\\d+$/)\r",
-									"});\r",
-									"// ****************************************** TCS for type  *****************************************\r",
-									"\r",
-									"//(check response body contain type property \r",
-									"pm.test(\"[3.User][3.10CreateUser][TC8]- Check respose schema contain type property\", function () {\r",
-									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"type\")\r",
-									"});\r",
-									"//check type is not null\r",
-									"pm.test(\"[3.User][3.10CreateUser][TC9]- Check type is not null\", function () {\r",
-									"    pm.expect(JSON.parse(responseBody).type).to.not.equal(null)\r",
-									"    pm.expect(JSON.parse(responseBody).type).to.not.equal(undefined)\r",
-									"});\r",
-									"//check type value is string/number (data type)\r",
-									"pm.test(\"[3.User][3.10CreateUser][TC10]- Check type is string/data type \", function () {\r",
-									"    pm.expect(typeof JSON.parse(responseBody).type).to.be.equal('string')\r",
-									"});\r",
-									"//Check type value on response\r",
-									"pm.test(\"[3.User][3.10CreateUser][TC11]-Check type value on response \", function () {\r",
-									"    pm.expect( JSON.parse(responseBody).type).to.be.equal('unknown')\r",
-									"        console.log((JSON.parse(responseBody).type),(\"unknown\"));\r",
-									"\r",
-									"});\r",
-									"//Check type is includes letters only\r",
-									"pm.test(\"[3.User][3.10CreateUser][TC12]-Check type is includes letters only\", function () {\r",
-									"    pm.expect(JSON.parse(responseBody).type).to.match(/^[a-zA-Z]+$/)\r",
-									"});\r",
-									"\r",
-									"// ****************************************** TCS for message  *****************************************\r",
-									"\r",
-									"//check response body contain message property \r",
-									"pm.test(\"[3.User][3.1CreateUserArr][TC13]- Check respose schema contain message property\", function () {\r",
-									"    pm.expect(JSON.parse(responseBody)).to.have.property(\"message\")\r",
-									"});\r",
-									"//check message is not null\r",
-									"pm.test(\"[3.User][3.10CreateUser][TC14]- Check message is not null\", function () {\r",
-									"    pm.expect(JSON.parse(responseBody).message).to.not.equal(null)\r",
-									"    pm.expect(JSON.parse(responseBody).message).to.not.equal(undefined)\r",
-									"});\r",
-									"//check message value is string (data type)\r",
-									"pm.test(\"[3.User][3.10CreateUser][TC15]- Check message is String/data type \", function () {\r",
-									"    pm.expect(typeof JSON.parse(responseBody).message).to.be.equal('string')\r",
-									"});\r",
-									"//Check message value on response\r",
-									"pm.test(\"[3.User][3.10CreateUser][TC16]-Check message value on response \", function () {\r",
-									"    pm.expect( JSON.parse(responseBody).message).to.be.equal(pm.collectionVariables.get(\"userID\"))\r",
-									"        console.log((JSON.parse(responseBody).message),(pm.collectionVariables.get(\"userID\")));\r",
-									"\r",
-									"});\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": " {\r\n    \"id\":{{userID}},\r\n    \"username\": \"{{randomUsername}}\",\r\n    \"firstName\": \"{{randomFirstName}}\",\r\n    \"lastName\": \"{{randomLastName}}\",\r\n    \"email\": \"{{randomEmail}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"phone\": \"{{randomMobileNumber}}\",\r\n    \"userStatus\": {{randomStatus}}\r\n  }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/v2/user",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"v2",
-								"user"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		}
@@ -4168,23 +4168,23 @@
 	"variable": [
 		{
 			"key": "statusType",
-			"value": ""
+			"value": "inprogress"
 		},
 		{
 			"key": "completeStatus",
-			"value": ""
+			"value": "true"
 		},
 		{
 			"key": "orderId",
-			"value": ""
+			"value": "90851532"
 		},
 		{
 			"key": "petId",
-			"value": ""
+			"value": "83410106"
 		},
 		{
 			"key": "shippingDate",
-			"value": ""
+			"value": "2023-11-29T09:42:33.982+0200"
 		},
 		{
 			"key": "password",
@@ -4193,143 +4193,143 @@
 		},
 		{
 			"key": "quantity",
-			"value": ""
+			"value": 5
 		},
 		{
 			"key": "userId",
-			"value": ""
+			"value": "54662769"
 		},
 		{
 			"key": "firstName",
-			"value": ""
+			"value": "Eva"
 		},
 		{
 			"key": "lastName",
-			"value": ""
+			"value": "Smith"
 		},
 		{
 			"key": "userName",
-			"value": ""
+			"value": "Eva Smith"
 		},
 		{
 			"key": "randomEmail",
-			"value": ""
+			"value": "dkhqUI@zoho.com"
 		},
 		{
 			"key": "randomMobileNumber",
-			"value": ""
+			"value": "01031892990"
 		},
 		{
 			"key": "userID",
-			"value": ""
+			"value": "15031269"
 		},
 		{
 			"key": "randomStatus",
-			"value": ""
+			"value": 0
 		},
 		{
 			"key": "randomFirstName",
-			"value": ""
+			"value": "Grace"
 		},
 		{
 			"key": "randomLastName",
-			"value": ""
+			"value": "Smith"
 		},
 		{
 			"key": "randomUsername",
-			"value": ""
+			"value": "grace smith"
 		},
 		{
 			"key": "id",
-			"value": ""
+			"value": 518
 		},
 		{
 			"key": "catId",
-			"value": ""
+			"value": 714
 		},
 		{
 			"key": "tagID",
-			"value": ""
+			"value": 603
 		},
 		{
 			"key": "categoryname",
-			"value": ""
+			"value": "qgkftjsii"
 		},
 		{
 			"key": "petName",
-			"value": ""
+			"value": "lxUSPareH"
 		},
 		{
 			"key": "tagName",
-			"value": ""
+			"value": "zviQpdQdl"
 		},
 		{
 			"key": "petID",
-			"value": ""
+			"value": 124
 		},
 		{
 			"key": "status",
-			"value": ""
+			"value": "pending"
 		},
 		{
 			"key": "randomLink",
-			"value": ""
+			"value": "https://example.com/page1?param1=value1&param2=value2&param3=value3"
 		},
 		{
 			"key": "shipDate",
-			"value": ""
+			"value": "2023-01-23T05:14:37Z+0200"
 		},
 		{
 			"key": "updatedStatus",
-			"value": ""
+			"value": "pending"
 		},
 		{
 			"key": "updatedPetID",
-			"value": ""
+			"value": 478
 		},
 		{
 			"key": "updatedCatId",
-			"value": ""
+			"value": 877
 		},
 		{
 			"key": "updatedTagID",
-			"value": ""
+			"value": 604
 		},
 		{
 			"key": "updatedCategoryname",
-			"value": ""
+			"value": "QDCypUTi"
 		},
 		{
 			"key": "updatedPetName",
-			"value": ""
+			"value": "JoLueMEE"
 		},
 		{
 			"key": "updatedTagName",
-			"value": ""
+			"value": "bxcVnsty"
 		},
 		{
 			"key": "updatedStatusType",
-			"value": ""
+			"value": "sold"
 		},
 		{
 			"key": "updatedRandomLink",
-			"value": ""
+			"value": "https://example.com/page1?param1=value1&param2=value2&param3=value3"
 		},
 		{
 			"key": "updatedRandomEmail",
-			"value": "ZqCGvd@outlook.com"
+			"value": "haSAVKuHnmQk@hotmail.com"
 		},
 		{
 			"key": "updatedRandomMobileNumber",
-			"value": "01144805608"
+			"value": "01047954171"
 		},
 		{
 			"key": "updatedUserID",
-			"value": ""
+			"value": "44103153"
 		},
 		{
 			"key": "updatedRandomStatus",
-			"value": ""
+			"value": 1
 		},
 		{
 			"key": "updatedRandomFirstName",
@@ -4337,35 +4337,35 @@
 		},
 		{
 			"key": "updatedRandomLastName",
-			"value": ""
+			"value": "Davis"
 		},
 		{
 			"key": "updatedRandomUsername",
-			"value": ""
+			"value": "eva davis"
 		},
 		{
 			"key": "updatedRandomUserID",
-			"value": ""
+			"value": "75445831"
 		},
 		{
 			"key": "catID",
-			"value": ""
+			"value": 979
 		},
 		{
 			"key": "name",
-			"value": ""
+			"value": "iotlWbwEe"
 		},
 		{
 			"key": "pet_status",
-			"value": ""
+			"value": "pending"
 		},
 		{
 			"key": "pet_id",
-			"value": ""
+			"value": 706
 		},
 		{
 			"key": "updatedName",
-			"value": ""
+			"value": "RShZCBuUUW"
 		}
 	]
 }
